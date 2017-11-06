@@ -1,15 +1,16 @@
 /*
  * Create a list that holds all of your cards
  */
-
-
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
-
+var cards = $("#deck li.card");
+// Display the cards on the page
+setTimeout(function(){
+$(".card").toggleClass("show open"); 
+}, 1500);
+$(".card").toggleClass("show open"); 
+//   - shuffle the list of cards using the provided "shuffle" method below
+shuffle(cards);
+//loop through each card and create its HTML
+//add each card's HTML to the page
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
@@ -26,6 +27,7 @@ function shuffle(array) {
 }
 
 
+
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
@@ -36,3 +38,58 @@ function shuffle(array) {
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+ let  moves = 0 , open = [] , correct = [] , wrong = 0 ;
+
+function child_value(element) {
+    return $(element).children().attr('class').split(' ')[1];
+}
+
+function restart(){
+    wrong = 0;
+    moves = 0;
+    open = [];
+    correct = [];
+    $('.moves').text(moves);
+    $('.card').removeClass(" open show match");	
+}
+
+function open_card(card){
+    $(open_element).toggleClass( "match");
+    $(card).toggleClass( "match");
+    correct.push(card);
+    correct.push(open_element);
+    moves += 1;
+    return;
+}
+function close_card(card){
+    $(open_element).toggleClass( "unmatch");
+    $(card).toggleClass( "unmatch");
+    moves += 1;
+    wrong += 1;
+    obj = $(card);
+    setTimeout($.proxy(function(){
+        $(open_element).toggleClass( "open show unmatch");
+        $(obj).toggleClass( "open show unmatch");
+    }), 1000);
+    return;
+}
+$('.restart').on('click', function(){
+    restart();
+});
+
+$('.card').on('click',function(){
+    if(!correct.includes(this)){
+        $(this).toggleClass( "open show");
+        value = child_value(this);
+        if(open.length === 0){
+            open.push(this);
+        }
+        else
+        {
+            open_element = open.pop();
+            current_card = $(this);
+            ((child_value(open_element) === value)?(open_card(current_card)):(close_card(current_card)));
+            $('.moves').text(moves);
+        }
+    }
+});
