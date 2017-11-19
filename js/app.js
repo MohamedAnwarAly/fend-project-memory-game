@@ -38,7 +38,7 @@ function shuffle(array) {
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
- let  moves = 0 , open = [] , correct = [] , wrong = 0 ;
+ let  moves = 0 , open = [] , correct = [] , wrong = 0 , sec = 0 , min = 0, stars = 3;
 
 function child_value(element) {
     return $(element).children().attr('class').split(' ')[1];
@@ -49,10 +49,30 @@ function restart(){
     moves = 0;
     open = [];
     correct = [];
+    stars = 3;
     $('.moves').text(moves);
     $('.card').removeClass(" open show match");	
 }
-
+function stars_counter(){
+	if (moves === 10){
+		stars === 2;
+        $("#1st").remove();
+	}else if (moves === 15){
+		stars === 1;
+		$('#2nd').remove();
+	}else if (moves === 20){
+		stars === 0;
+		$("#3rd").remove();
+		final_result('lose');
+	}
+}
+function final_result(result){
+	if (result === 'win'){
+		alert("congratulations you have won the game by"+stars+"stars and"+moves+"moves in"+min+"minutes and"+sec+"seconds.");
+	} else if (result === 'lose'){
+		alert('you have lost all your stars try again');
+	}
+}
 function open_card(card){
     $(open_element).toggleClass( "match");
     $(card).toggleClass( "match");
@@ -71,6 +91,7 @@ function close_card(card){
         $(open_element).toggleClass( "open show unmatch");
         $(obj).toggleClass( "open show unmatch");
     }), 1000);
+    stars_counter();
     return;
 }
 $('.restart').on('click', function(){
@@ -90,6 +111,9 @@ $('.card').on('click',function(){
             current_card = $(this);
             ((child_value(open_element) === value)?(open_card(current_card)):(close_card(current_card)));
             $('.moves').text(moves);
+            if(correct.length === 16){
+            	final_result('win');
+            }
         }
     }
 });
