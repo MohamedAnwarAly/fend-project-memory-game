@@ -1,5 +1,6 @@
-    <!doctype html>
+<!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <title>Matching Game</title>
@@ -9,6 +10,7 @@
     <script language="JavaScript" type="text/javascript" src="jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="css/app.css">
 </head>
+
 <body>
 
     <div class="container">
@@ -17,18 +19,24 @@
         </header>
 
         <section class="score-panel">
-        	<ul class="stars">
-        		<li><i class="fa fa-star" id="1st"></i></li>
-        		<li><i class="fa fa-star" id="2nd"></i></li>
-        		<li><i class="fa fa-star" id="3rd"></i></li>
-        	</ul>
+            <ul class="stars">
+                <li><i class="fa fa-star" id="1st"></i></li>
+                <li><i class="fa fa-star" id="2nd"></i></li>
+                <li><i class="fa fa-star" id="3rd"></i></li>
+            </ul>
 
-        	<span class="moves">0</span> Moves
+            <span class="moves">0</span> Moves
+
+            <span class="timer">
+                _________Timer <i class="time">0:0</i>
+            </span>
 
             <div class="restart">
-        		<i class="fa fa-repeat"></i>
-        	</div>
+                <i class="fa fa-repeat"></i>
+            </div>
         </section>
+
+        <span class="begin">Start Game</span>
 
         <ul class="deck">
             <li class="card">
@@ -84,4 +92,5 @@
 
     <script src="js/app.js"></script>
 </body>
+
 </html>
