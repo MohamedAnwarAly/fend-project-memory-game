@@ -32,7 +32,18 @@ h1 {
     font-family: 'Open Sans', sans-serif;
     font-weight: 300;
 }
+.begin {
+    height: 100px;
+    width: 250px;
+    background: #2e3d49;
+    border-radius:10px;
+    color: #ffffff;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    font-size: 200%
 
+}
 /*
  * Styles for the deck of cards
  */

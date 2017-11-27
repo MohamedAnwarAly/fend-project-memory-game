@@ -46,7 +46,7 @@ let moves = 0,
     sec = 0,
     min = 0,
     stars = 3;
-
+$('.deck').hide();
 function child_value(element) {
     return $(element).children().attr('class').split(' ')[1];
 }
@@ -73,13 +73,13 @@ function restart() {
 
 function stars_counter() {
     if (moves === 10) {
-        stars === 2;
+        stars === 3;
         $("#1st").remove();
     } else if (moves === 15) {
-        stars === 1;
+        stars === 2;
         $('#2nd').remove();
     } else if (moves === 20) {
-        stars === 0;
+        stars === 1;
         $("#3rd").remove();
         final_result('lose');
     }
@@ -135,6 +135,7 @@ function timer() {
 }
 
 $('.begin').on('click', function() {
+	$('.deck').show();
     $('.begin').hide();
     timer();
 });
